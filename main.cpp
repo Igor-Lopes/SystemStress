@@ -8,6 +8,7 @@
 #include <unistd.h> //Library which has the sleep command.
 #include <pthread.h> //The library used to manage posix threads.
 #include <cstdlib>
+#include <string>
 //------------------Headers--------------------------------------------------
 #include "parameters.h"
 #include "memory.h"

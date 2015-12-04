@@ -1,74 +1,72 @@
-Sysstress:
------------------------------------------------------------------------------------
+Sysstress
+Igor Lopes
+December 4th, 2015.
 
+- How the program works:
+
+1. Memory stressing:
+
+The main objective of the program is simulate the Software Aging issue on the machine.
+There are two types of simulation: Static and Dynamic.
+1.1 Static Stressing:
+
+The program requests memory allocation through malloc. It requests a static size of memory in a
+static interval defined by the user in the file "Parameters.config".
+
+1.2 Dynamic Stressing:
+
+The program requests memory allocation through malloc. It requests a random size of memory in a
+static interval in a range defined by the user in the file "Parameters.config".
+
+* Please note that malloc allocates a value close to the real value requested. It is not easy to determine
+the exact amount of memory that is being allocated in the heap memory. For stressing purposes it works
+allocating memory through the use of pointers and occupying memory of the system in a static or dynamic interval, reproducing
+the Software Aging issue.
+
+-----------------------------------------------------------------------------------
 - Compiling The program:
 
-Put all the files in the same directory and run the command:
-
-	g++ -std=c++11 -o sysstress main.cpp -lpthread
-
-*The command std=c+11 is necessary due to string conversions with 'atoi'.
-*The command -lpthread is necessary due the use of the pthread (Posix Thread)library.
+Run the command make on terminal to compile the source files
+Run make clean to remove object files
 -----------------------------------------------------------------------------------
-
 - Running the Program:
 
-Open the file "Parameters.config" with any text editor (nano, vi, gedit)
+Open the file "Parameters.config" with any text editor (e.g nano, vi, gedit, atom)
 
 1) Check if the value of RUNNING. In case it's false, change it to true and save the file.
 2) Check the values of the simulation and make necessary changes. (e.g memory allocation, static allocation,
 dynamic allocation)
 
-Contents of the file "Parameters.config":
+Example of contents in the file "Parameters.config":
 
-RUNNING = true      -> This value is used to run or to exit the program. Value: Boolean.
-MEMORY = true       -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Boolean.
-CPU = false	    -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Boolean.
-CORES = 8	    -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Integer.
-I/0 = false	    -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Boolean.
-STATIC = true       -> If true the stress simulation will be static. If not it will be dynamic. Value: Boolean.
-ALLOC_STATIC = 1024 -> If the stress simulation is static, the size  of memory allocated will be the on assigned here in Kbytes. Value: Integer.
-INTERV_STATIC = 60  -> If the stress simulation is static, the static allocation frequency will be the on assigned here in seconds. Value: Integer.
-INTERV_MIN = 0      -> If the stress simulation is dynamic, the minimum allocation frequency will be the on assigned here in seconds. Value: Integer.
-INTERV_MAX = 240    -> If the stress simulation is dynamic, the maximum allocation frequency will be the on assigned here in seconds. Value: Integer.
-ALLOC_MIN = 1       -> If the stress simulation is dynamic, the minimum allocation size will be defined here in Kbytes. Value: Integer.
-ALLOC_MAX = 1024    -> If the stress simulation is dynamic, the maximum allocation size will be defined here in Kbytes. Value: Integer.
+RUNNING = false		-> This value is used to run or to exit the program. Value: Boolean.
+MEMORY = false    -> Enable/Disable Memory stressing. Value: Boolean.
+CPU = true		-> Enable/Disable CPU stressing. Value: Boolean.
+CPU_STATIC = true		-> If true the the CPU stress simulation will be static. If not it will be dynamic. Value: Boolean.
+CPU_START =  20		-> Initial CPU time usage for the test. Value: Integer.
+CPU_INTERV_STATIC = 10		-> If the CPU stress simulation is static, the static CPU interval will be the on assigned here in seconds. Value: Integer.
+CPU_INTERV_MIN = 240		-> If the CPU stress simulation is dynamic, the minimum interval will be the on assigned here in seconds. Value: Integer.
+CPU_INTERV_MAX = 1024		-> If the CPU stress simulation is dynamic, the maximum interval will be the on assigned here in seconds. Value: Integer.
+CPU_ALLOC_STATIC = 10		-> The static CPU time usage will be the on assigned here. Value: Integer.
+CPU_ALLOC_MIN = 1				-> The minimum CPU time usage will be the on assigned here. Value: Integer.
+CPU_ALLOC_MAX = 15		-> The maximum CPU time usage will be the on assigned here. Value: Integer.
+MEM_STATIC = false		-> If true the the Memory stress simulation will be static. If not it will be dynamic. Value: Boolean.
+MEM_ALLOC_STATIC = 1024		-> The static allocation size will be defined here in Kbytes. Value: Integer.
+MEM_INTERV_STATIC = 10		-> The static allocation frequency will be the on assigned here in seconds. Value: Integer.
+MEM_INTERV_MIN = 1		-> The minimum interval will be defined here in Seconds. Value: Integer.
+MEM_INTERV_MAX = 5		-> The maximum interval will be defined here in Seconds. Value: Integer.
+MEM_ALLOC_MIN = 1		-> If the stress simulation is dynamic, the minimum allocation size will be defined here in Kbytes. Value: Integer.
+MEM_ALLOC_MAX = 1024		-> If the stress simulation is dynamic, the maximum allocation size will be defined here in Kbytes. Value: Integer.
 
-*Please note that as the program is still under development, 
-some of the values of the file are not going to be used for 
-the current version of Sysstress.
-
-3) Enter the command: 
+3) Enter the command:
 
 	./systress
 
 -----------------------------------------------------------------------------------
 
-- Stopping the program:
+- Exiting the program and stopping stressing tests:
 
 Open the file "Parameters.config" and change the value of Running to false and save the file.
+If you wish to end a stressing test, change the value of CPU or MEMORY to FALSE.
 
 -----------------------------------------------------------------------------------
-
-- How the program works (Memory stressing):
-
-The main objective of the program is simulate the Software Aging issue on the machine.
-There are two types of simulation: Static and Dynamic.
-
-- Static Stressing:
- 
-The program requests memory allocation through malloc. It requests a static size of memory in a
-static interval defined by the user in the file "Parameters.config".
-
-- Dynamic Stressing:
- 
-The program requests memory allocation through malloc. It requests a random size of memory in a
-static interval in a range defined by the user in the file "Parameters.config".
-
-*Please note that malloc allocates a value close to the real value requested. It is not easy to determine
-the exact amount of memory that is being allocated in the heap memory. For stressing purposes it works 
-allocating memory through the use of pointers and occupying memory of the system graduatly, reproducing
-the Software Aging issue.
-
------------------------------------------------------------------------------------
-

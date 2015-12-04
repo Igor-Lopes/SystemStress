@@ -11,5 +11,6 @@ using namespace std;
 class Cpu{
 public:
   int getPid();
+    
   int stressCpu();
 };
