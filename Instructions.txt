@@ -1,0 +1,74 @@
+Sysstress:
+-----------------------------------------------------------------------------------
+
+- Compiling The program:
+
+Put all the files in the same directory and run the command:
+
+	g++ -std=c++11 -o sysstress main.cpp -lpthread
+
+*The command std=c+11 is necessary due to string conversions with 'atoi'.
+*The command -lpthread is necessary due the use of the pthread (Posix Thread)library.
+-----------------------------------------------------------------------------------
+
+- Running the Program:
+
+Open the file "Parameters.config" with any text editor (nano, vi, gedit)
+
+1) Check if the value of RUNNING. In case it's false, change it to true and save the file.
+2) Check the values of the simulation and make necessary changes. (e.g memory allocation, static allocation,
+dynamic allocation)
+
+Contents of the file "Parameters.config":
+
+RUNNING = true      -> This value is used to run or to exit the program. Value: Boolean.
+MEMORY = true       -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Boolean.
+CPU = false	    -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Boolean.
+CORES = 8	    -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Integer.
+I/0 = false	    -> [FUTURE USE] This value is not going to be used for the current version of the program. Value: Boolean.
+STATIC = true       -> If true the stress simulation will be static. If not it will be dynamic. Value: Boolean.
+ALLOC_STATIC = 1024 -> If the stress simulation is static, the size  of memory allocated will be the on assigned here in Kbytes. Value: Integer.
+INTERV_STATIC = 60  -> If the stress simulation is static, the static allocation frequency will be the on assigned here in seconds. Value: Integer.
+INTERV_MIN = 0      -> If the stress simulation is dynamic, the minimum allocation frequency will be the on assigned here in seconds. Value: Integer.
+INTERV_MAX = 240    -> If the stress simulation is dynamic, the maximum allocation frequency will be the on assigned here in seconds. Value: Integer.
+ALLOC_MIN = 1       -> If the stress simulation is dynamic, the minimum allocation size will be defined here in Kbytes. Value: Integer.
+ALLOC_MAX = 1024    -> If the stress simulation is dynamic, the maximum allocation size will be defined here in Kbytes. Value: Integer.
+
+*Please note that as the program is still under development, 
+some of the values of the file are not going to be used for 
+the current version of Sysstress.
+
+3) Enter the command: 
+
+	./systress
+
+-----------------------------------------------------------------------------------
+
+- Stopping the program:
+
+Open the file "Parameters.config" and change the value of Running to false and save the file.
+
+-----------------------------------------------------------------------------------
+
+- How the program works (Memory stressing):
+
+The main objective of the program is simulate the Software Aging issue on the machine.
+There are two types of simulation: Static and Dynamic.
+
+- Static Stressing:
+ 
+The program requests memory allocation through malloc. It requests a static size of memory in a
+static interval defined by the user in the file "Parameters.config".
+
+- Dynamic Stressing:
+ 
+The program requests memory allocation through malloc. It requests a random size of memory in a
+static interval in a range defined by the user in the file "Parameters.config".
+
+*Please note that malloc allocates a value close to the real value requested. It is not easy to determine
+the exact amount of memory that is being allocated in the heap memory. For stressing purposes it works 
+allocating memory through the use of pointers and occupying memory of the system graduatly, reproducing
+the Software Aging issue.
+
+-----------------------------------------------------------------------------------
+
