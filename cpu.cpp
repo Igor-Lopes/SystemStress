@@ -12,16 +12,16 @@
 using namespace std;
 
 int Cpu::getPid(){
-		return getpid();
-	}
+	return getpid();
+}
 
 int Cpu::stressCpu(){
-		int i = 0;
-		for(;;){
-			i++;
-			if(i > 2000000){
-				i = 0;
-			}
+	int i = 0;
+	for(;;){
+		i++;
+		if(i > 2000000){
+			i = 0;
 		}
-	return i;
 	}
+	return i;
+}
